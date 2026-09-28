@@ -4,9 +4,10 @@ import { DAY, ageJobs, canonicalUrl, mergeCandidates, setStatus } from '../src/d
 const now = Date.parse('2026-09-28T12:00:00Z');
 const platforms = { Lever:['jobs.lever.co'], Greenhouse:['job-boards.greenhouse.io'] };
 const candidate = (overrides={}) => ({ title:'Senior Product Designer',company:'Acme',url:'https://jobs.lever.co/acme/123',remote:true,postedAt:new Date(now-DAY).toISOString(), ...overrides });
-test('only verified dates strictly under 72 hours enter the store',()=>{
+test('posting age is advisory and missing or future dates stay unknown',()=>{
   for(const age of [0,1,3*DAY-1]) assert.equal(mergeCandidates([],[candidate({postedAt:new Date(now-age).toISOString()})],platforms,now),1);
-  for(const postedAt of [new Date(now-3*DAY).toISOString(),new Date(now+1).toISOString(),'unknown',undefined]) assert.equal(mergeCandidates([],[candidate({postedAt})],platforms,now),0);
+  for(const postedAt of [new Date(now-3*DAY).toISOString(),new Date(now+1).toISOString(),'unknown',undefined]) assert.equal(mergeCandidates([],[candidate({postedAt})],platforms,now),1);
+  const jobs=[];mergeCandidates(jobs,[candidate({postedAt:undefined})],platforms,now);assert.equal(jobs[0].postedAt,null);
 });
 test('rejects irrelevant titles, nonremote roles, expired and unsupported posts',()=>{
   for(const change of [{title:'Engineer'},{remote:false},{url:'https://evil.example/job'},{validThrough:new Date(now-1).toISOString()}]) assert.equal(mergeCandidates([],[candidate(change)],platforms,now),0);

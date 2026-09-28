@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { discover } from '../src/sources.js';
 import { discoverBoards } from '../src/boards.js';
 const platforms = { Greenhouse: ['job-boards.greenhouse.io'], Lever: ['jobs.lever.co'] };
-test('Google searches are paced and Retry-After stops all remaining Google requests', async () => {
+test('Yandex searches are paced and Retry-After stops all remaining Yandex requests', async () => {
   let calls = 0;
   const waits = [];
   const result = await discover({platforms}, async () => {
@@ -13,12 +13,12 @@ test('Google searches are paced and Retry-After stops all remaining Google reque
   assert.deepEqual(waits,[10000]);
   assert.equal(result.nextAllowedAt,new Date(20000000).toISOString());
 });
-test('verification halts Google immediately, and saved cooldown prevents the next run', async () => {
+test('verification halts Yandex immediately, and saved cooldown prevents the next run', async () => {
   let calls=0;
   const fetcher=async()=>{calls++;return new Response('unusual traffic');};
   const first=await discover({platforms},fetcher,undefined,{now:()=>0});
-  assert.equal(calls,1);assert.equal(first.reports[1].skipped,'Google cooldown');
-  await discover({platforms,googleNotBefore:first.nextAllowedAt},fetcher,undefined,{now:()=>1});
+  assert.equal(calls,1);assert.equal(first.reports[1].skipped,'Yandex cooldown');
+  await discover({platforms,yandexNotBefore:first.nextAllowedAt},fetcher,undefined,{now:()=>1});
   assert.equal(calls,1);
 });
 test('direct APIs discover URLs independently; Greenhouse freshness uses first publication',async()=>{

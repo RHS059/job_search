@@ -42,14 +42,15 @@ export function mergeCandidates(jobs, candidates, platforms, now = Date.now()) {
   for (const c of candidates) {
     const posted = Date.parse(c.postedAt);
     const platform = platformFor(c.url, platforms);
-    if (!platform || !Number.isFinite(posted) || now - posted < 0 || now - posted >= 3 * DAY || !c.remote) continue;
+    if (!platform || !c.remote) continue;
+    const verifiedDate = Number.isFinite(posted) && posted <= now;
     if (!/\b(ux(?:\s*\/\s*ui)? designer|ui(?:\s*\/\s*ux)? designer|user experience designer|user interface designer|ui developer|product designer)\b/i.test(c.title)) continue;
     if (c.validThrough && Date.parse(c.validThrough) < now) continue;
     const url = canonicalUrl(c.url);
     const identity = c.requisitionId ? `${platform}:${c.company.toLowerCase().trim()}:${c.requisitionId}` : url;
     if (urls.has(url) || identities.has(identity)) continue;
     const at = new Date(now).toISOString();
-    jobs.push({ id: createHash('sha256').update(identity).digest('hex').slice(0, 24), identity, title: c.title, company: c.company || 'Unknown company', location: c.location || 'Remote', platform, url, postedAt: new Date(posted).toISOString(), storedAt: at, statusUpdatedAt: at, status: 'discovered', history: [{ status: 'discovered', at, actor: 'collector' }] });
+    jobs.push({ id: createHash('sha256').update(identity).digest('hex').slice(0, 24), identity, title: c.title, company: c.company || 'Unknown company', location: c.location || 'Remote', platform, url, postedAt: verifiedDate ? new Date(posted).toISOString() : null, storedAt: at, statusUpdatedAt: at, status: 'discovered', history: [{ status: 'discovered', at, actor: 'collector' }] });
     urls.add(url); identities.add(identity); added++;
   }
   return added;

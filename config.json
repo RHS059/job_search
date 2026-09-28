@@ -1,8 +1,8 @@
 {
   "ghostAfterDays": 14,
   "seedUrls": [],
-  "googleDelayMs": 10000,
-  "googleCooldownMs": 10800000,
+  "yandexDelayMs": 10000,
+  "yandexCooldownMs": 10800000,
   "boardDelayMs": 1000,
   "directBoards": {
     "Greenhouse": ["figma", "gitlab", "webflow", "remotecom"],

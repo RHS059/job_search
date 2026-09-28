@@ -1,4 +1,5 @@
 import { canonicalUrl, platformFor } from './domain.js';
+import { isRemote } from './remote.js';
 export const decode = value => value.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const plain = value => decode(String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ')).trim();
 export function parsePostings(html, url) {
@@ -7,7 +8,7 @@ export function parsePostings(html, url) {
     if (!node || typeof node !== 'object') return;
     if ([node['@type']].flat().includes('JobPosting')) {
       const locations = [node.jobLocation || []].flat().map(l => [l.address?.addressLocality, l.address?.addressRegion, l.address?.addressCountry].filter(Boolean).join(', ')).filter(Boolean);
-      const remote = [node.jobLocationType].flat().includes('TELECOMMUTE') || /\bremote\b/i.test(locations.join(' ') + ' ' + node.title);
+      const remote = [node.jobLocationType].flat().includes('TELECOMMUTE') || isRemote({title: node.title, location: locations.join(' '), description: node.description});
       found.push({ title: plain(node.title), company: plain(node.hiringOrganization?.name), location: locations.join(' / ') || 'Remote', remote, postedAt: node.datePosted, validThrough: node.validThrough, requisitionId: node.identifier?.value, url });
       return;
     }
@@ -36,12 +37,12 @@ export async function getText(url, allowed, fetcher = fetch) {
   }
   throw new Error('Too many redirects');
 }
-export function parseGoogleUrls(html, platforms) {
+export function parseYandexUrls(html, platforms) {
   const urls = new Set();
   for (const match of html.matchAll(/href=["']([^"']+)["']/g)) {
     try {
-      let link = new URL(decode(match[1]), 'https://www.google.com');
-      if (['www.google.com', 'google.com'].includes(link.hostname) && link.pathname === '/url') {
+      let link = new URL(decode(match[1]), 'https://yandex.com');
+      if (['yandex.com', 'yandex.com'].includes(link.hostname) && link.pathname === '/url') {
         link = new URL(link.searchParams.get('q') || link.searchParams.get('url'));
       }
       if (platformFor(link.href, platforms) && link.pathname !== '/') urls.add(canonicalUrl(link.href));
@@ -49,28 +50,28 @@ export function parseGoogleUrls(html, platforms) {
   }
   return [...urls];
 }
-export function googleBlocked(html) {
-  return /unusual traffic|g-recaptcha|recaptcha\/api|Before you continue to Google/i.test(html);
+export function yandexBlocked(html) {
+  return /unusual traffic|g-recaptcha|recaptcha\/api|showcaptcha|SmartCaptcha|confirm you are not a robot|Before you continue to Yandex/i.test(html);
 }
 export async function discover(config, fetcher = fetch, renderSearch, { wait = ms => new Promise(resolve => setTimeout(resolve, ms)), now = Date.now } = {}) {
   const urls = new Set((config.seedUrls || []).filter(u => platformFor(u, config.platforms)).map(canonicalUrl));
   const reports = [];
   let browser;
-  let stopped = Date.parse(config.googleNotBefore || '') > now();
-  let nextAllowedAt = stopped ? config.googleNotBefore : null;
+  let stopped = Date.parse(config.yandexNotBefore || '') > now();
+  let nextAllowedAt = stopped ? config.yandexNotBefore : null;
   let requested = false;
-  const pace = async () => { if (requested) await wait(config.googleDelayMs ?? 10000); requested = true; };
+  const pace = async () => { if (requested) await wait(config.yandexDelayMs ?? 10000); requested = true; };
   try {
     for (const [platform, domains] of Object.entries(config.platforms)) {
       const query = '(' + domains.map(d => 'site:' + d).join(' OR ') + ') ("UX designer" OR "UI designer" OR "UX/UI designer" OR "user experience designer" OR "user interface designer" OR "UI developer" OR "product designer") "remote"';
-      const searchUrl = 'https://www.google.com/search?' + new URLSearchParams({ q: query, num: '20', hl: 'en' });
-      const report = { platform, provider: 'Google', searchUrl, results: 0, errors: [] };
-      if (stopped) { report.skipped = 'Google cooldown'; reports.push(report); continue; }
+      const searchUrl = 'https://yandex.com/search/?' + new URLSearchParams({ text: query, lang: 'en' });
+      const report = { platform, provider: 'Yandex', searchUrl, results: 0, errors: [] };
+      if (stopped) { report.skipped = 'Yandex cooldown'; reports.push(report); continue; }
       try {
         await pace();
-        let html = await getText(searchUrl, u => { const parsed = new URL(u); return parsed.protocol === 'https:' && parsed.hostname === 'www.google.com'; }, fetcher);
-        if (googleBlocked(html)) throw new Error('Google requires an interactive verification');
-        let found = parseGoogleUrls(html, config.platforms).filter(u => platformFor(u, config.platforms) === platform);
+        let html = await getText(searchUrl, u => { const parsed = new URL(u); return parsed.protocol === 'https:' && parsed.hostname === 'yandex.com'; }, fetcher);
+        if (yandexBlocked(html)) throw new Error('Yandex requires an interactive verification');
+        let found = parseYandexUrls(html, config.platforms).filter(u => platformFor(u, config.platforms) === platform);
         if (!found.length && /enablejs|enable javascript/i.test(html)) {
           await pace();
           if (renderSearch) html = await renderSearch(searchUrl);
@@ -81,21 +82,21 @@ export async function discover(config, fetcher = fetch, renderSearch, { wait = m
             try {
               const response = await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
               if (response?.status() === 429) { const error = new Error('Source returned HTTP 429'); error.status = 429; const retry = response.headers()['retry-after']; error.retryAfterMs = retry && /^\d+$/.test(retry) ? Number(retry) * 1000 : Math.max(0, Date.parse(retry || '') - now()) || 0; throw error; }
-              await page.waitForFunction(() => document.querySelector('#search') || document.querySelector('#rso') || /unusual traffic|Before you continue to Google|did not match any documents/i.test(document.body.innerText), null, { timeout: 15000 }).catch(() => {});
+              await page.waitForFunction(() => document.querySelector('.serp-item') || document.querySelector('.serp-list') || /unusual traffic|not a robot|Nothing found|No results/i.test(document.body.innerText), null, { timeout: 15000 }).catch(() => {});
               html = await page.content();
             } finally { await page.close(); }
           }
-          if (googleBlocked(html)) throw new Error('Google requires an interactive verification');
-          found = parseGoogleUrls(html, config.platforms).filter(u => platformFor(u, config.platforms) === platform);
+          if (yandexBlocked(html)) throw new Error('Yandex requires an interactive verification');
+          found = parseYandexUrls(html, config.platforms).filter(u => platformFor(u, config.platforms) === platform);
         }
         found.forEach(u => urls.add(u));
         report.results = found.length;
-        if (!found.length && !/did not match any documents|no results found/i.test(html)) throw new Error('Google returned no readable posting links');
+        if (!found.length && !/did not match any documents|no results found/i.test(html)) throw new Error('Yandex returned no readable posting links');
       } catch (error) {
         report.errors.push(error.message);
         if ([403, 429].includes(error.status) || /interactive verification/.test(error.message)) {
           stopped = true;
-          nextAllowedAt = new Date(now() + Math.max(config.googleCooldownMs ?? 10800000, error.retryAfterMs || 0)).toISOString();
+          nextAllowedAt = new Date(now() + Math.max(config.yandexCooldownMs ?? 10800000, error.retryAfterMs || 0)).toISOString();
         }
       }
       reports.push(report);

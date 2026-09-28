@@ -10,15 +10,15 @@ async function api(path, options = {}) {
   return body;
 }
 function element(tag, text, className) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (className) node.className = className; return node; }
-const date = value => new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+const date = value => value ? new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'Not provided';
 function render() {
   const query = $('search').value.trim().toLowerCase();
   let rows = state.jobs.filter(j => `${j.title} ${j.company} ${j.location}`.toLowerCase().includes(query) && ($('platform').value === 'all' || j.platform === $('platform').value) && ($('status').value === 'all' || ($('status').value === 'active' ? !['inactive','rejected','ghosted'].includes(j.status) : j.status === $('status').value)));
   const sort = $('sort').value;
-  rows.sort((a,b) => sort === 'company' ? a.company.localeCompare(b.company) : Date.parse(b[sort === 'stored' ? 'storedAt' : sort === 'updated' ? 'statusUpdatedAt' : 'postedAt']) - Date.parse(a[sort === 'stored' ? 'storedAt' : sort === 'updated' ? 'statusUpdatedAt' : 'postedAt']));
+  rows.sort((a,b) => sort === 'company' ? a.company.localeCompare(b.company) : (Date.parse(b[sort === 'stored' ? 'storedAt' : sort === 'updated' ? 'statusUpdatedAt' : 'postedAt']) || 0) - (Date.parse(a[sort === 'stored' ? 'storedAt' : sort === 'updated' ? 'statusUpdatedAt' : 'postedAt']) || 0));
   $('rows').replaceChildren(...rows.map(job => {
     const row = element('tr'), role = element('td'); role.append(element('strong', job.title), element('small', job.company));
-    const posted = element('td', date(job.postedAt)); posted.title = `Posted ${new Date(job.postedAt).toLocaleString()} · Discovered ${new Date(job.storedAt).toLocaleString()}`;
+    const posted = element('td', date(job.postedAt)); posted.title = `Posted ${(job.postedAt ? new Date(job.postedAt).toLocaleString() : 'date not provided')} · Discovered ${new Date(job.storedAt).toLocaleString()}`;
     const status = element('td'), select = element('select'); select.setAttribute('aria-label', `Status for ${job.title} at ${job.company}`); select.dataset.status = job.status;
     for (const value of state.statuses) { const option = element('option', value[0].toUpperCase() + value.slice(1)); option.value = value; select.append(option); } select.value = job.status;
     select.addEventListener('change', async () => { select.disabled = true; try { await api(`/api/jobs/${job.id}`, { method:'PATCH', body:JSON.stringify({status:select.value,updatedAt:job.statusUpdatedAt}) }); $('notice').textContent = `Saved status for ${job.company}.`; } catch(e) { $('notice').textContent = e.message; } finally { await load(); } });

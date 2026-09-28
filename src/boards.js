@@ -1,5 +1,6 @@
 import { canonicalUrl, platformFor } from './domain.js';
 import { getText } from './sources.js';
+import { isRemote } from './remote.js';
 
 const designTitle = /\b(ux(?:\s*\/\s*ui)? designer|ui(?:\s*\/\s*ux)? designer|user experience designer|user interface designer|ui developer|product designer)\b/i;
 
@@ -42,7 +43,18 @@ export async function discoverBoards(config, savedUrls = [], fetcher = fetch, wa
             if (!urls.has(url)) { urls.add(url); report.results++; }
             if (platform === 'Greenhouse') {
               const location = job.location?.name || '';
-              candidates.push({ url, title, company: job.company_name || slug, location, remote: /\bremote\b/i.test(location), postedAt: job.first_published, requisitionId: job.requisition_id || String(job.id), validThrough: job.application_deadline });
+              let description = job.content || '';
+              if (!isRemote({title, location, description}) && !description && job.id) {
+                try {
+                  await wait(config.boardDelayMs ?? 1000);
+                  const detail = JSON.parse(await getText(`https://${host}/v1/boards/${slug}/jobs/${encodeURIComponent(job.id)}`, u => new URL(u).hostname === host && new URL(u).protocol === 'https:', fetcher));
+                  description = detail.content || '';
+                } catch (error) { if ([403,429].includes(error.status)) throw error; report.errors.push(error.message); }
+              }
+              candidates.push({ url, title, company: job.company_name || slug, location, remote: isRemote({title, location, description}), postedAt: job.first_published, requisitionId: job.requisition_id || String(job.id), validThrough: job.application_deadline });
+            } else {
+              const location = job.categories?.location || '';
+              candidates.push({url, title, company: slug, location, remote: isRemote({title,location,description: job.descriptionPlain || job.description,workplaceType: job.workplaceType}), postedAt: job.datePosted, requisitionId: job.id});
             }
           }
           if (platform === 'Greenhouse' || jobs.length < 100) break;
