@@ -13,6 +13,18 @@ export function collect() {
 async function run() {
   const startedAt = new Date().toISOString();
   const { urls, reports } = await discover(config);
+  // Keep discovery evidence even when a posting cannot be verified or a later fetch fails.
+  await transaction(data => {
+    data.discoveredUrls ||= [];
+    const known = new Map(data.discoveredUrls.map(entry => [entry.url, entry]));
+    for (const url of urls) {
+      if (known.has(url)) known.get(url).lastSeenAt = startedAt;
+      else {
+        const entry = { url, platform: platformFor(url, config.platforms), source: config.seedUrls.includes(url) ? 'seed' : 'Google', firstSeenAt: startedAt, lastSeenAt: startedAt };
+        data.discoveredUrls.push(entry); known.set(url, entry);
+      }
+    }
+  });
   const candidates = [], failures = [];
   let noMetadata = 0;
   for (let i = 0; i < urls.length; i += 4) {
@@ -28,10 +40,12 @@ async function run() {
   return transaction(data => {
     ageJobs(data.jobs, Date.now(), config.ghostAfterDays);
     const added = mergeCandidates(data.jobs, candidates, config.platforms);
-    data.lastRun = { startedAt, finishedAt: new Date().toISOString(), added, inspected: urls.length, noMetadata, reports, failures };
+    data.lastRun = { provider: 'Google', startedAt, finishedAt: new Date().toISOString(), added, discovered: urls.length, inspected: urls.length, noMetadata, reports, failures };
     return data.lastRun;
   });
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  console.log(JSON.stringify(await collect(), null, 2));
+  const result = await collect();
+  console.log(JSON.stringify(result, null, 2));
+  if (result.discovered === 0 && result.reports.some(report => report.errors.length)) process.exitCode = 1;
 }

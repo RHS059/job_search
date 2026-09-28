@@ -1,4 +1,4 @@
-import { platformFor } from './domain.js';
+import { canonicalUrl, platformFor } from './domain.js';
 export const decode = value => value.replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const plain = value => decode(String(value || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ')).trim();
 export function parsePostings(html, url) {
@@ -30,35 +30,56 @@ export async function getText(url, allowed, fetcher = fetch) {
   }
   throw new Error('Too many redirects');
 }
-export async function discover(config, fetcher = fetch) {
-  const urls = new Set(config.seedUrls || []);
-  const reports = [];
-  for (const [platform, domains] of Object.entries(config.platforms)) {
-    const report = { platform, results: 0, errors: [] };
-    for (const terms of ['"UX designer" OR "UI designer" OR "UX/UI designer"', '"user experience designer" OR "user interface designer" OR "UI developer" OR "product designer"']) {
-      try {
-        const query = `(${domains.map(d => `site:${d}`).join(' OR ')}) (${terms}) remote`;
-        const xml = await getText(`https://www.bing.com/search?format=rss&count=50&q=${encodeURIComponent(query)}`, u => new URL(u).hostname === 'www.bing.com', fetcher);
-        if (!/<rss\b/i.test(xml)) throw new Error('Search returned no RSS feed');
-        for (const item of xml.matchAll(/<item>([\s\S]*?)<\/item>/g)) {
-          const link = item[1].match(/<link>([\s\S]*?)<\/link>/)?.[1];
-          if (link && platformFor(decode(link), config.platforms) === platform) { urls.add(decode(link)); report.results++; }
-        }
-      } catch (error) { report.errors.push(error.message); }
-    }
-    if (report.results === 0) {
-      try {
-        const query = `site:${domains[0]} ("product designer" OR "UX designer" OR "UI designer" OR "UI developer" OR "user experience designer" OR "user interface designer") remote`;
-        const html = await getText(`https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`, u => new URL(u).hostname === 'html.duckduckgo.com', fetcher);
-        if (/anomaly|challenge-form|bots use DuckDuckGo/i.test(html)) throw new Error('Search requires an interactive challenge');
-        for (const match of html.matchAll(/href=["']([^"']+)["']/g)) {
-          let link = decode(match[1]);
-          if (link.startsWith('//duckduckgo.com/l/')) link = new URL('https:' + link).searchParams.get('uddg') || '';
-          if (platformFor(link, config.platforms) === platform) { urls.add(link); report.results++; }
-        }
-      } catch (error) { report.errors.push(error.message); }
-    }
-    reports.push(report);
+export function parseGoogleUrls(html, platforms) {
+  const urls = new Set();
+  for (const match of html.matchAll(/href=["']([^"']+)["']/g)) {
+    try {
+      let link = new URL(decode(match[1]), 'https://www.google.com');
+      if (['www.google.com', 'google.com'].includes(link.hostname) && link.pathname === '/url') {
+        link = new URL(link.searchParams.get('q') || link.searchParams.get('url'));
+      }
+      if (platformFor(link.href, platforms) && link.pathname !== '/') urls.add(canonicalUrl(link.href));
+    } catch { /* Ignore navigation and malformed links. */ }
   }
+  return [...urls];
+}
+export function googleBlocked(html) {
+  return /unusual traffic|g-recaptcha|recaptcha\/api|Before you continue to Google/i.test(html);
+}
+export async function discover(config, fetcher = fetch, renderSearch) {
+  const urls = new Set((config.seedUrls || []).filter(u => platformFor(u, config.platforms)).map(canonicalUrl));
+  const reports = [];
+  let browser;
+  try {
+    for (const [platform, domains] of Object.entries(config.platforms)) {
+      const query = '(' + domains.map(d => 'site:' + d).join(' OR ') + ') ("UX designer" OR "UI designer" OR "UX/UI designer" OR "user experience designer" OR "user interface designer" OR "UI developer" OR "product designer") "remote"';
+      const searchUrl = 'https://www.google.com/search?' + new URLSearchParams({ q: query, num: '20', hl: 'en' });
+      const report = { platform, provider: 'Google', searchUrl, results: 0, errors: [] };
+      try {
+        let html = await getText(searchUrl, u => { const parsed = new URL(u); return parsed.protocol === 'https:' && parsed.hostname === 'www.google.com'; }, fetcher);
+        if (googleBlocked(html)) throw new Error('Google requires an interactive verification');
+        let found = parseGoogleUrls(html, config.platforms).filter(u => platformFor(u, config.platforms) === platform);
+        if (!found.length && /enablejs|enable javascript/i.test(html)) {
+          if (renderSearch) html = await renderSearch(searchUrl);
+          else if (fetcher === fetch) {
+            const { chromium } = await import('playwright');
+            browser ||= await chromium.launch({ headless: true });
+            const page = await browser.newPage();
+            try {
+              await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+              await page.waitForFunction(() => document.querySelector('#search') || document.querySelector('#rso') || /unusual traffic|Before you continue to Google|did not match any documents/i.test(document.body.innerText), null, { timeout: 15000 }).catch(() => {});
+              html = await page.content();
+            } finally { await page.close(); }
+          }
+          if (googleBlocked(html)) throw new Error('Google requires an interactive verification');
+          found = parseGoogleUrls(html, config.platforms).filter(u => platformFor(u, config.platforms) === platform);
+        }
+        found.forEach(u => urls.add(u));
+        report.results = found.length;
+        if (!found.length && !/did not match any documents|no results found/i.test(html)) throw new Error('Google returned no readable posting links');
+      } catch (error) { report.errors.push(error.message); }
+      reports.push(report);
+    }
+  } finally { await browser?.close(); }
   return { urls: [...urls], reports };
 }

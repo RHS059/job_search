@@ -4,7 +4,7 @@ A Dracula-themed, responsive tracker with filters, direct posting links, status 
 
 ## Run
 
-Requires Node.js 22+. No dependencies to install. Run `npm test`, then `npm start`, and open http://127.0.0.1:3000. Click **Find more jobs**, or run `npm run collect`. Back up `data/jobs.json`. Do not run the CLI collector and server against the same local file simultaneously; use the app's search button or GitHub storage for concurrency.
+Requires Node.js 22+. Run `npm ci` and `npx playwright install chromium`, then `npm test` and `npm start`, and open http://127.0.0.1:3000. Click **Find more jobs**, or run `npm run collect`. Back up `data/jobs.json`. Do not run the CLI collector and server against the same local file simultaneously; use the app's search button or GitHub storage for concurrency.
 
 ## Shared storage and scheduling
 
@@ -27,7 +27,7 @@ Alternatively set `ENABLE_SCHEDULER=true` for local collection at startup and ev
 
 ## Source coverage
 
-Bing RSS discovers links across all nine platforms. Original posting pages supply `JobPosting` JSON-LD; search snippets never establish freshness. Add known posting URLs to `seedUrls` in `config.json` to bypass indexing. Metadata contract: https://developers.google.com/search/docs/appearance/structured-data/job-posting
+Google Search discovers links across all nine platforms. JavaScript-only search responses are rendered with Chromium through Playwright. Original posting pages supply `JobPosting` JSON-LD; search snippets never establish freshness. Add known posting URLs to `seedUrls` in `config.json` to bypass indexing. Metadata contract: https://developers.google.com/search/docs/appearance/structured-data/job-posting
 
 All platforms use a shared structured-data adapter, not bespoke ATS API integrations. JavaScript-only pages (often Workday), bot-blocked pages, missing dates, and unindexed jobs may be skipped. Search availability affects discovery. Diagnostics stay in background logs and the stored collection report. Empty results mean no verified matches were stored, not that no jobs exist. Remote roles may have regional restrictions; check original postings.
 
@@ -38,3 +38,7 @@ All platforms use a shared structured-data adapter, not bespoke ATS API integrat
 Standard-library Node, JSON, and plain HTML/CSS/JS keep the personal app easy to run and audit. Modules separate lifecycle rules, storage, external sources, collection, and presentation. Atomic local file replacement and GitHub SHA checks protect writes. A database/queue would be appropriate for multi-user scale. No cross-browser or high-scale certification is claimed.
 
 Rollback by reverting application changes while retaining job data. Back up JSON before schema changes. Inspect Actions and the persisted search report when collection fails. No credentials are committed.
+
+## Google URL discovery
+
+Each run saves deduplicated URLs in `data/jobs.json` under `discoveredUrls`, with source, platform, first-seen and last-seen timestamps. This is an unverified URL ledger, not the jobs table. Original posting verification still controls the 72-hour admission rule. URLs persist even when the posting cannot be read or its date is absent. Google may require interactive verification on automated runners; the collector does not bypass it. If no URLs are found and a search fails, the action fails after saving diagnostics instead of reporting a misleading success. The UI does not display these diagnostics.
