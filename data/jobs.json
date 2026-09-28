@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "jobs": [],
+  "lastRun": {
+    "startedAt": "2026-09-28T16:17:54.264Z",
+    "finishedAt": "2026-09-28T16:17:59.884Z",
+    "added": 0,
+    "inspected": 0,
+    "noMetadata": 0,
+    "reports": [
+      {
+        "platform": "Greenhouse",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "Lever",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "SmartRecruiters",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "Workday",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "BambooHR",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "Jobvite",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "iCIMS",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "JazzHR",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "Workable",
+        "results": 0,
+        "errors": []
+      }
+    ],
+    "failures": []
+  }
+}
