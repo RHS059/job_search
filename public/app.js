@@ -12,8 +12,6 @@ async function api(path, options = {}) {
 function element(tag, text, className) { const node = document.createElement(tag); if (text !== undefined) node.textContent = text; if (className) node.className = className; return node; }
 const date = value => new Date(value).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 function render() {
-  const counts = [state.jobs.filter(j => !['inactive','rejected','ghosted'].includes(j.status)).length, state.jobs.filter(j => ['discovered','in progress'].includes(j.status)).length, state.jobs.filter(j => j.status === 'applied').length, state.jobs.filter(j => ['interviewed','offer extended'].includes(j.status)).length];
-  $('stats').replaceChildren(...['On your radar','Ready to apply','Applications sent','Conversations started'].map((label, i) => { const card = element('div', undefined, 'stat'); card.append(element('p', label), element('strong', String(counts[i]).padStart(2,'0'))); return card; }));
   const query = $('search').value.trim().toLowerCase();
   let rows = state.jobs.filter(j => `${j.title} ${j.company} ${j.location}`.toLowerCase().includes(query) && ($('platform').value === 'all' || j.platform === $('platform').value) && ($('status').value === 'all' || ($('status').value === 'active' ? !['inactive','rejected','ghosted'].includes(j.status) : j.status === $('status').value)));
   const sort = $('sort').value;
@@ -35,8 +33,7 @@ function render() {
   $('count').textContent = state.jobs.length;
   $('showing').textContent = `${rows.length} of ${state.jobs.length} opportunities`;
   $('empty').hidden = rows.length !== 0;
-  $('empty-message').textContent = state.jobs.length ? 'No matches. Try another filter or reset your search.' : 'No fresh roles yet. Your radar will keep looking.';
-  $('ghost-days').textContent = state.ghostAfterDays || 14;
+  $('empty-message').textContent = state.jobs.length ? 'No matches. Try another filter or reset your search.' : 'New roles will appear here.';
   if (state.lastRun) {
     $('last-run').textContent = `Last search ${new Date(state.lastRun.finishedAt).toLocaleString()}`;
   }
@@ -52,6 +49,5 @@ async function load() {
 for (const id of ['search','status','platform','sort']) $(id).addEventListener('input', render);
 $('reset').addEventListener('click',()=>{ $('search').value=''; $('status').value='active'; $('platform').value='all'; $('sort').value='newest'; render(); });
 $('access').addEventListener('submit',async e=>{ e.preventDefault(); key=$('key').value; sessionStorage.setItem('nightshift-key',key); await load(); });
-$('refresh').addEventListener('click',async()=>{ $('refresh').disabled=true; try { const result=await api('/api/collect',{method:'POST'}); $('notice').textContent=result.message; } catch(e){$('notice').textContent=e.message;} finally {setTimeout(()=>$('refresh').disabled=false,5000);} });
 $('export').addEventListener('click',()=>{ const url=URL.createObjectURL(new Blob([JSON.stringify({version:1,jobs:state.jobs,lastRun:state.lastRun},null,2)],{type:'application/json'})); const a=element('a'); a.href=url;a.download='nightshift-jobs.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000); });
 await load(); setInterval(()=>{if (!document.hidden && !document.activeElement?.closest('tbody')) load();},30000);
