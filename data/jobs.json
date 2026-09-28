@@ -2,8 +2,8 @@
   "version": 1,
   "jobs": [],
   "lastRun": {
-    "startedAt": "2026-09-28T16:17:54.264Z",
-    "finishedAt": "2026-09-28T16:17:59.884Z",
+    "startedAt": "2026-09-28T16:22:47.446Z",
+    "finishedAt": "2026-09-28T16:22:51.567Z",
     "added": 0,
     "inspected": 0,
     "noMetadata": 0,
@@ -21,37 +21,51 @@
       {
         "platform": "SmartRecruiters",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       },
       {
         "platform": "Workday",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       },
       {
         "platform": "BambooHR",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       },
       {
         "platform": "Jobvite",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       },
       {
         "platform": "iCIMS",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       },
       {
         "platform": "JazzHR",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       },
       {
         "platform": "Workable",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Search requires an interactive challenge"
+        ]
       }
     ],
     "failures": []
