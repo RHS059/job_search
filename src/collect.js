@@ -16,7 +16,7 @@ async function run() {
   const previous = await readStore();
   const yandex = await discover({ ...config, yandexNotBefore: previous.yandexNotBefore });
   // This source remains available even when Yandex pauses for verification.
-  const direct = await discoverBoards(config, [...(previous.discoveredUrls || []), ...yandex.urls]);
+  const direct = await discoverBoards(config, [...(previous.discoveredUrls || []).filter(entry => ['Yandex', 'Google'].includes(entry.source)), ...yandex.urls]);
   const urls = [...new Set([...yandex.urls, ...direct.urls])];
   const reports = [...yandex.reports, ...direct.reports];
   // Keep discovery evidence even when a posting cannot be verified or a later fetch fails.
@@ -52,12 +52,13 @@ async function run() {
   return transaction(data => {
     ageJobs(data.jobs, Date.now(), config.ghostAfterDays);
     const added = mergeCandidates(data.jobs, candidates, config.platforms);
-    data.lastRun = { provider: 'Yandex + public board APIs', startedAt, finishedAt: new Date().toISOString(), added, discovered: urls.length, inspected: urls.length, noMetadata, reports, failures };
+    const searchComplete = yandex.reports.every(report => !report.errors.length && !report.skipped);
+    data.lastRun = { searchComplete, provider: 'Yandex + public board APIs', startedAt, finishedAt: new Date().toISOString(), added, discovered: urls.length, inspected: urls.length, noMetadata, reports, failures };
     return data.lastRun;
   });
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const result = await collect();
   console.log(JSON.stringify(result, null, 2));
-  if (result.discovered === 0 && result.reports.some(report => report.errors.length)) process.exitCode = 1;
+  if (!result.searchComplete) process.exitCode = 1;
 }

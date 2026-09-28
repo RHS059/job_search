@@ -4,19 +4,48 @@
   "yandexDelayMs": 10000,
   "yandexCooldownMs": 10800000,
   "boardDelayMs": 1000,
-  "directBoards": {
-    "Greenhouse": ["figma", "gitlab", "webflow", "remotecom"],
-    "Lever": ["wealthsimple"]
-  },
   "platforms": {
-    "Greenhouse": ["boards.greenhouse.io", "job-boards.greenhouse.io"],
-    "Lever": ["jobs.lever.co"],
-    "SmartRecruiters": ["jobs.smartrecruiters.com"],
-    "Workday": ["myworkdayjobs.com"],
-    "BambooHR": ["bamboohr.com"],
-    "Jobvite": ["jobs.jobvite.com"],
-    "iCIMS": ["icims.com"],
-    "JazzHR": ["apply.jazz.co", "applytojob.com"],
-    "Workable": ["careers.workable.com", "apply.workable.com", "jobs.workable.com"]
+    "Greenhouse": [
+      "boards.greenhouse.io",
+      "job-boards.greenhouse.io"
+    ],
+    "Lever": [
+      "jobs.lever.co"
+    ],
+    "SmartRecruiters": [
+      "jobs.smartrecruiters.com"
+    ],
+    "Workday": [
+      "myworkdayjobs.com"
+    ],
+    "BambooHR": [
+      "bamboohr.com"
+    ],
+    "Jobvite": [
+      "jobs.jobvite.com"
+    ],
+    "iCIMS": [
+      "icims.com"
+    ],
+    "JazzHR": [
+      "apply.jazz.co",
+      "applytojob.com"
+    ],
+    "Workable": [
+      "careers.workable.com",
+      "apply.workable.com",
+      "jobs.workable.com"
+    ]
+  },
+  "searchDomains": {
+    "Greenhouse": "boards.greenhouse.io",
+    "Lever": "jobs.lever.co",
+    "SmartRecruiters": "jobs.smartrecruiters.com",
+    "Workday": "wd1.myworkdayjobs.com",
+    "BambooHR": "jobs.bamboohr.com",
+    "Jobvite": "jobs.jobvite.com",
+    "iCIMS": "careers.icims.com",
+    "JazzHR": "apply.jazz.co",
+    "Workable": "careers.workable.com"
   }
 }

@@ -3,6 +3,18 @@ import assert from 'node:assert/strict';
 import { parsePostings, getText, discover, parseYandexUrls } from '../src/sources.js';
 import { readFile } from 'node:fs/promises';
 const config=JSON.parse(await readFile(new URL('../config.json',import.meta.url)));
+test('search scope is exactly the nine requested domains, without company restrictions',async()=>{
+  assert.equal(config.directBoards,undefined);
+  assert.deepEqual(Object.values(config.searchDomains),['boards.greenhouse.io','jobs.lever.co','jobs.smartrecruiters.com','wd1.myworkdayjobs.com','jobs.bamboohr.com','jobs.jobvite.com','careers.icims.com','apply.jazz.co','careers.workable.com']);
+  const queries=[];
+  await discover(config,async raw=>{queries.push(new URL(raw).searchParams.get('text'));return new Response('no results found');},undefined,{wait:async()=>{}});
+  assert.equal(queries.length,9);
+  queries.forEach((query,i)=>{
+    assert.ok(query.startsWith(`site:${Object.values(config.searchDomains)[i]} (`));
+    assert.ok(query.endsWith('AND "remote"'));
+    for(const role of ['UX designer','UI designer','UX/UI designer','user experience designer','user interface designer','UI developer','product designer']) assert.ok(query.includes(`"${role}"`));
+  });
+});
 test('JSON-LD graph metadata accepted on every supported platform',()=>{
   for(const domains of Object.values(config.platforms)) {
     const html=`<script type="application/ld+json">${JSON.stringify({'@graph':[{'@type':'JobPosting',title:'UX Designer',datePosted:'2026-09-28',jobLocationType:'TELECOMMUTE',hiringOrganization:{name:'Studio'},identifier:{value:'A'}}]})}</script>`;

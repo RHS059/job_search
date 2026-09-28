@@ -63,7 +63,7 @@ export async function discover(config, fetcher = fetch, renderSearch, { wait = m
   const pace = async () => { if (requested) await wait(config.yandexDelayMs ?? 10000); requested = true; };
   try {
     for (const [platform, domains] of Object.entries(config.platforms)) {
-      const query = '(' + domains.map(d => 'site:' + d).join(' OR ') + ') ("UX designer" OR "UI designer" OR "UX/UI designer" OR "user experience designer" OR "user interface designer" OR "UI developer" OR "product designer") "remote"';
+      const query = 'site:' + (config.searchDomains?.[platform] || domains[0]) + ' ("UX designer" OR "UI designer" OR "UX/UI designer" OR "user experience designer" OR "user interface designer" OR "UI developer" OR "product designer") AND "remote"';
       const searchUrl = 'https://yandex.com/search/?' + new URLSearchParams({ text: query, lang: 'en' });
       const report = { platform, provider: 'Yandex', searchUrl, results: 0, errors: [] };
       if (stopped) { report.skipped = 'Yandex cooldown'; reports.push(report); continue; }
