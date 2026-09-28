@@ -23,18 +23,19 @@
     }
   ],
   "lastRun": {
+    "searchComplete": false,
     "provider": "Yandex + public board APIs",
-    "startedAt": "2026-09-28T18:06:08.176Z",
-    "finishedAt": "2026-09-28T18:06:37.497Z",
-    "added": 1,
-    "discovered": 8,
-    "inspected": 8,
-    "noMetadata": 7,
+    "startedAt": "2026-09-28T23:20:31.372Z",
+    "finishedAt": "2026-09-28T23:20:34.689Z",
+    "added": 0,
+    "discovered": 0,
+    "inspected": 0,
+    "noMetadata": 0,
     "reports": [
       {
         "platform": "Greenhouse",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Aboards.greenhouse.io+OR+site%3Ajob-boards.greenhouse.io%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Aboards.greenhouse.io+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [
           "Yandex requires an interactive verification"
@@ -43,7 +44,7 @@
       {
         "platform": "Lever",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Ajobs.lever.co%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.lever.co+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -51,7 +52,7 @@
       {
         "platform": "SmartRecruiters",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Ajobs.smartrecruiters.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.smartrecruiters.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -59,7 +60,7 @@
       {
         "platform": "Workday",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Amyworkdayjobs.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Awd1.myworkdayjobs.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -67,7 +68,7 @@
       {
         "platform": "BambooHR",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Abamboohr.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.bamboohr.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -75,7 +76,7 @@
       {
         "platform": "Jobvite",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Ajobs.jobvite.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.jobvite.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -83,7 +84,7 @@
       {
         "platform": "iCIMS",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Aicims.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Acareers.icims.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -91,7 +92,7 @@
       {
         "platform": "JazzHR",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Aapply.jazz.co+OR+site%3Aapplytojob.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Aapply.jazz.co+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
@@ -99,45 +100,10 @@
       {
         "platform": "Workable",
         "provider": "Yandex",
-        "searchUrl": "https://yandex.com/search/?text=%28site%3Acareers.workable.com+OR+site%3Aapply.workable.com+OR+site%3Ajobs.workable.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
+        "searchUrl": "https://yandex.com/search/?text=site%3Acareers.workable.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
         "skipped": "Yandex cooldown"
-      },
-      {
-        "platform": "Greenhouse",
-        "board": "figma",
-        "provider": "Public board API",
-        "results": 7,
-        "errors": []
-      },
-      {
-        "platform": "Greenhouse",
-        "board": "gitlab",
-        "provider": "Public board API",
-        "results": 0,
-        "errors": []
-      },
-      {
-        "platform": "Greenhouse",
-        "board": "webflow",
-        "provider": "Public board API",
-        "results": 1,
-        "errors": []
-      },
-      {
-        "platform": "Greenhouse",
-        "board": "remotecom",
-        "provider": "Public board API",
-        "results": 0,
-        "errors": []
-      },
-      {
-        "platform": "Lever",
-        "board": "wealthsimple",
-        "provider": "Public board API",
-        "results": 0,
-        "errors": []
       }
     ],
     "failures": []
