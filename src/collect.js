@@ -1,7 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { ageJobs, mergeCandidates, platformFor } from './domain.js';
-import { transaction } from './store.js';
+import { readStore, transaction } from './store.js';
+import { discoverBoards } from './boards.js';
 import { discover, getText, parsePostings } from './sources.js';
 export const config = JSON.parse(await readFile(new URL('../config.json', import.meta.url), 'utf8'));
 let running;
@@ -12,35 +13,46 @@ export function collect() {
 }
 async function run() {
   const startedAt = new Date().toISOString();
-  const { urls, reports } = await discover(config);
+  const previous = await readStore();
+  const google = await discover({ ...config, googleNotBefore: previous.googleNotBefore });
+  // This source remains available even when Google pauses for verification.
+  const direct = await discoverBoards(config, [...(previous.discoveredUrls || []), ...google.urls]);
+  const urls = [...new Set([...google.urls, ...direct.urls])];
+  const reports = [...google.reports, ...direct.reports];
   // Keep discovery evidence even when a posting cannot be verified or a later fetch fails.
   await transaction(data => {
+    data.googleNotBefore = google.nextAllowedAt;
     data.discoveredUrls ||= [];
     const known = new Map(data.discoveredUrls.map(entry => [entry.url, entry]));
     for (const url of urls) {
       if (known.has(url)) known.get(url).lastSeenAt = startedAt;
       else {
-        const entry = { url, platform: platformFor(url, config.platforms), source: config.seedUrls.includes(url) ? 'seed' : 'Google', firstSeenAt: startedAt, lastSeenAt: startedAt };
+        const entry = { url, platform: platformFor(url, config.platforms), source: config.seedUrls.includes(url) ? 'seed' : direct.urls.includes(url) ? 'Public board API' : 'Google', firstSeenAt: startedAt, lastSeenAt: startedAt };
         data.discoveredUrls.push(entry); known.set(url, entry);
       }
     }
   });
-  const candidates = [], failures = [];
+  const candidates = [...direct.candidates], failures = [];
   let noMetadata = 0;
-  for (let i = 0; i < urls.length; i += 4) {
-    await Promise.all(urls.slice(i, i + 4).map(async url => {
+  const blockedHosts = new Set();
+  let fetched = false;
+  for (const url of urls) {
+      const host = new URL(url).hostname;
+      if (blockedHosts.has(host)) continue;
+      if (direct.candidates.some(candidate => candidate.url === url && candidate.remote && Number.isFinite(Date.parse(candidate.postedAt)))) continue;
       try {
+        if (fetched) await new Promise(resolve => setTimeout(resolve, config.boardDelayMs ?? 1000));
+        fetched = true;
         const html = await getText(url, u => !!platformFor(u, config.platforms));
         const parsed = parsePostings(html, url);
         if (!parsed.length) noMetadata++;
         candidates.push(...parsed);
-      } catch (error) { failures.push({ url, error: error.message }); }
-    }));
+      } catch (error) { failures.push({ url, error: error.message }); if ([403, 429].includes(error.status)) blockedHosts.add(host); }
   }
   return transaction(data => {
     ageJobs(data.jobs, Date.now(), config.ghostAfterDays);
     const added = mergeCandidates(data.jobs, candidates, config.platforms);
-    data.lastRun = { provider: 'Google', startedAt, finishedAt: new Date().toISOString(), added, discovered: urls.length, inspected: urls.length, noMetadata, reports, failures };
+    data.lastRun = { provider: 'Google + public board APIs', startedAt, finishedAt: new Date().toISOString(), added, discovered: urls.length, inspected: urls.length, noMetadata, reports, failures };
     return data.lastRun;
   });
 }

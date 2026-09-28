@@ -1,6 +1,13 @@
 {
   "ghostAfterDays": 14,
   "seedUrls": [],
+  "googleDelayMs": 10000,
+  "googleCooldownMs": 10800000,
+  "boardDelayMs": 1000,
+  "directBoards": {
+    "Greenhouse": ["figma", "gitlab", "webflow", "remotecom"],
+    "Lever": ["wealthsimple"]
+  },
   "platforms": {
     "Greenhouse": ["boards.greenhouse.io", "job-boards.greenhouse.io"],
     "Lever": ["jobs.lever.co"],

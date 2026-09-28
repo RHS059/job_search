@@ -29,7 +29,7 @@ Alternatively set `ENABLE_SCHEDULER=true` for local collection at startup and ev
 
 Google Search discovers links across all nine platforms. JavaScript-only search responses are rendered with Chromium through Playwright. Original posting pages supply `JobPosting` JSON-LD; search snippets never establish freshness. Add known posting URLs to `seedUrls` in `config.json` to bypass indexing. Metadata contract: https://developers.google.com/search/docs/appearance/structured-data/job-posting
 
-All platforms use a shared structured-data adapter, not bespoke ATS API integrations. JavaScript-only pages (often Workday), bot-blocked pages, missing dates, and unindexed jobs may be skipped. Search availability affects discovery. Diagnostics stay in background logs and the stored collection report. Empty results mean no verified matches were stored, not that no jobs exist. Remote roles may have regional restrictions; check original postings.
+All nine platforms support Google discovery and structured-data verification. Greenhouse and Lever additionally have direct public API discovery. JavaScript-only pages (often Workday), bot-blocked pages, missing dates, and unindexed jobs may be skipped. Search availability affects discovery. Diagnostics stay in background logs and the stored collection report. Empty results mean no verified matches were stored, not that no jobs exist. Remote roles may have regional restrictions; check original postings.
 
 ## Validation and operations
 
@@ -42,3 +42,13 @@ Rollback by reverting application changes while retaining job data. Back up JSON
 ## Google URL discovery
 
 Each run saves deduplicated URLs in `data/jobs.json` under `discoveredUrls`, with source, platform, first-seen and last-seen timestamps. This is an unverified URL ledger, not the jobs table. Original posting verification still controls the 72-hour admission rule. URLs persist even when the posting cannot be read or its date is absent. Google may require interactive verification on automated runners; the collector does not bypass it. If no URLs are found and a search fails, the action fails after saving diagnostics instead of reporting a misleading success. The UI does not display these diagnostics.
+
+## Pacing and independent fallback
+
+Google requests (including a rendered retry) are separated by 10 seconds. An HTTP 403/429 or verification challenge stops Google for the rest of the run. Its cooldown is saved in JSON for subsequent runs: three hours minimum, or a longer Retry-After header. No challenge bypass or automatic rapid retries.
+
+Public Greenhouse and Lever APIs run independently on every collection. `directBoards` in `config.json` seeds known company boards; additional boards are learned from saved URLs. This is coverage of those companies, not a global ATS index. Start with verified Figma, GitLab, Webflow, Remote and Wealthsimple feeds. Add company board slugs to expand coverage. API requests are paced one second apart per provider; a block stops that provider for the run. Posting-page fetches are sequential and paced too.
+
+Greenhouse `first_published` supplies the publication date; `updated_at` never qualifies an old job as new. API URLs are retained even if no recent job qualifies. Lever dates still require posting-page verification. Public APIs may still rate-limit; the fallback avoids dependence on search-engine scraping, not all possible outages.
+
+API contracts: https://docs.greenhouse.io/job-board.html and https://github.com/lever/postings-api
