@@ -2,13 +2,13 @@
   "version": 1,
   "jobs": [],
   "lastRun": {
-    "provider": "Google",
-    "startedAt": "2026-09-28T17:33:58.568Z",
-    "finishedAt": "2026-09-28T17:34:06.749Z",
+    "provider": "Google + public board APIs",
+    "startedAt": "2026-09-28T17:53:26.102Z",
+    "finishedAt": "2026-09-28T17:54:05.788Z",
     "added": 0,
-    "discovered": 0,
-    "inspected": 0,
-    "noMetadata": 0,
+    "discovered": 8,
+    "inspected": 8,
+    "noMetadata": 6,
     "reports": [
       {
         "platform": "Greenhouse",
@@ -24,75 +24,107 @@
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.lever.co%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Google requires an interactive verification"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "SmartRecruiters",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.smartrecruiters.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Google requires an interactive verification"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "Workday",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Amyworkdayjobs.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Source returned HTTP 429"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "BambooHR",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Abamboohr.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Source returned HTTP 429"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "Jobvite",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.jobvite.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Source returned HTTP 429"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "iCIMS",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Aicims.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Source returned HTTP 429"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "JazzHR",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Aapply.jazz.co+OR+site%3Aapplytojob.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Source returned HTTP 429"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
       },
       {
         "platform": "Workable",
         "provider": "Google",
         "searchUrl": "https://www.google.com/search?q=%28site%3Acareers.workable.com+OR+site%3Aapply.workable.com+OR+site%3Ajobs.workable.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": [
-          "Source returned HTTP 429"
-        ]
+        "errors": [],
+        "skipped": "Google cooldown"
+      },
+      {
+        "platform": "Greenhouse",
+        "board": "figma",
+        "provider": "Public board API",
+        "results": 7,
+        "errors": []
+      },
+      {
+        "platform": "Greenhouse",
+        "board": "gitlab",
+        "provider": "Public board API",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "Greenhouse",
+        "board": "webflow",
+        "provider": "Public board API",
+        "results": 1,
+        "errors": []
+      },
+      {
+        "platform": "Greenhouse",
+        "board": "remotecom",
+        "provider": "Public board API",
+        "results": 0,
+        "errors": []
+      },
+      {
+        "platform": "Lever",
+        "board": "wealthsimple",
+        "provider": "Public board API",
+        "results": 0,
+        "errors": []
       }
     ],
-    "failures": []
+    "failures": [
+      {
+        "url": "https://job-boards.greenhouse.io/figma/jobs/6126976004?gh_jid=6126976004",
+        "error": "The operation was aborted due to timeout"
+      }
+    ]
   },
   "discoveredUrls": [
     {
