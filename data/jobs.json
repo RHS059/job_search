@@ -94,5 +94,63 @@
     ],
     "failures": []
   },
-  "discoveredUrls": []
+  "discoveredUrls": [
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/6180053004?gh_jid=6180053004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/5711913004?gh_jid=5711913004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/6126976004?gh_jid=6126976004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/5711468004?gh_jid=5711468004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/5787576004?gh_jid=5787576004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/5711595004?gh_jid=5711595004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/figma/jobs/6193686004?gh_jid=6193686004",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    },
+    {
+      "url": "https://job-boards.greenhouse.io/webflow/jobs/8213629",
+      "platform": "Greenhouse",
+      "source": "Public board API",
+      "firstSeenAt": "2026-09-28T17:53:26.102Z",
+      "lastSeenAt": "2026-09-28T17:53:26.102Z"
+    }
+  ],
+  "googleNotBefore": "2026-09-28T20:53:38.365Z"
 }
