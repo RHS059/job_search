@@ -1,87 +1,108 @@
 {
   "version": 1,
-  "jobs": [],
+  "jobs": [
+    {
+      "id": "758d011eb20c576a23742d0f",
+      "identity": "Greenhouse:webflow:R-101418",
+      "title": "Staff Product Designer, Agentic CMS",
+      "company": "Webflow",
+      "location": "CA Remote (BC & ON only); U.S. Remote",
+      "platform": "Greenhouse",
+      "url": "https://job-boards.greenhouse.io/webflow/jobs/8213629",
+      "postedAt": "2026-09-18T17:02:40.000Z",
+      "storedAt": "2026-09-28T18:06:37.496Z",
+      "statusUpdatedAt": "2026-09-28T18:06:37.496Z",
+      "status": "discovered",
+      "history": [
+        {
+          "status": "discovered",
+          "at": "2026-09-28T18:06:37.496Z",
+          "actor": "collector"
+        }
+      ]
+    }
+  ],
   "lastRun": {
-    "provider": "Google + public board APIs",
-    "startedAt": "2026-09-28T17:53:26.102Z",
-    "finishedAt": "2026-09-28T17:54:05.788Z",
-    "added": 0,
+    "provider": "Yandex + public board APIs",
+    "startedAt": "2026-09-28T18:06:08.176Z",
+    "finishedAt": "2026-09-28T18:06:37.497Z",
+    "added": 1,
     "discovered": 8,
     "inspected": 8,
-    "noMetadata": 6,
+    "noMetadata": 7,
     "reports": [
       {
         "platform": "Greenhouse",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Aboards.greenhouse.io+OR+site%3Ajob-boards.greenhouse.io%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Aboards.greenhouse.io+OR+site%3Ajob-boards.greenhouse.io%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [
-          "Google requires an interactive verification"
+          "Yandex requires an interactive verification"
         ]
       },
       {
         "platform": "Lever",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.lever.co%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Ajobs.lever.co%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "SmartRecruiters",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.smartrecruiters.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Ajobs.smartrecruiters.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "Workday",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Amyworkdayjobs.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Amyworkdayjobs.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "BambooHR",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Abamboohr.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Abamboohr.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "Jobvite",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.jobvite.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Ajobs.jobvite.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "iCIMS",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Aicims.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Aicims.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "JazzHR",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Aapply.jazz.co+OR+site%3Aapplytojob.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Aapply.jazz.co+OR+site%3Aapplytojob.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "Workable",
-        "provider": "Google",
-        "searchUrl": "https://www.google.com/search?q=%28site%3Acareers.workable.com+OR+site%3Aapply.workable.com+OR+site%3Ajobs.workable.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
+        "provider": "Yandex",
+        "searchUrl": "https://yandex.com/search/?text=%28site%3Acareers.workable.com+OR+site%3Aapply.workable.com+OR+site%3Ajobs.workable.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&lang=en",
         "results": 0,
         "errors": [],
-        "skipped": "Google cooldown"
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "Greenhouse",
@@ -119,12 +140,7 @@
         "errors": []
       }
     ],
-    "failures": [
-      {
-        "url": "https://job-boards.greenhouse.io/figma/jobs/6126976004?gh_jid=6126976004",
-        "error": "The operation was aborted due to timeout"
-      }
-    ]
+    "failures": []
   },
   "discoveredUrls": [
     {
