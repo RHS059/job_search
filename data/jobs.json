@@ -2,69 +2,93 @@
   "version": 1,
   "jobs": [],
   "lastRun": {
-    "startedAt": "2026-09-28T17:26:23.560Z",
-    "finishedAt": "2026-09-28T17:26:27.690Z",
+    "provider": "Google",
+    "startedAt": "2026-09-28T17:33:58.568Z",
+    "finishedAt": "2026-09-28T17:34:06.749Z",
     "added": 0,
+    "discovered": 0,
     "inspected": 0,
     "noMetadata": 0,
     "reports": [
       {
         "platform": "Greenhouse",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Aboards.greenhouse.io+OR+site%3Ajob-boards.greenhouse.io%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Google requires an interactive verification"
+        ]
       },
       {
         "platform": "Lever",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.lever.co%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
-        "errors": []
+        "errors": [
+          "Google requires an interactive verification"
+        ]
       },
       {
         "platform": "SmartRecruiters",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.smartrecruiters.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Google requires an interactive verification"
         ]
       },
       {
         "platform": "Workday",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Amyworkdayjobs.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Source returned HTTP 429"
         ]
       },
       {
         "platform": "BambooHR",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Abamboohr.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Source returned HTTP 429"
         ]
       },
       {
         "platform": "Jobvite",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Ajobs.jobvite.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Source returned HTTP 429"
         ]
       },
       {
         "platform": "iCIMS",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Aicims.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Source returned HTTP 429"
         ]
       },
       {
         "platform": "JazzHR",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Aapply.jazz.co+OR+site%3Aapplytojob.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Source returned HTTP 429"
         ]
       },
       {
         "platform": "Workable",
+        "provider": "Google",
+        "searchUrl": "https://www.google.com/search?q=%28site%3Acareers.workable.com+OR+site%3Aapply.workable.com+OR+site%3Ajobs.workable.com%29+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+%22remote%22&num=20&hl=en",
         "results": 0,
         "errors": [
-          "Search requires an interactive challenge"
+          "Source returned HTTP 429"
         ]
       }
     ],
