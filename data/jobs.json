@@ -11,13 +11,18 @@
       "url": "https://job-boards.greenhouse.io/webflow/jobs/8213629",
       "postedAt": "2026-09-18T17:02:40.000Z",
       "storedAt": "2026-09-28T18:06:37.496Z",
-      "statusUpdatedAt": "2026-09-28T18:06:37.496Z",
-      "status": "discovered",
+      "statusUpdatedAt": "2026-10-01T20:22:42.593Z",
+      "status": "inactive",
       "history": [
         {
           "status": "discovered",
           "at": "2026-09-28T18:06:37.496Z",
           "actor": "collector"
+        },
+        {
+          "status": "inactive",
+          "at": "2026-10-01T20:22:42.593Z",
+          "actor": "automatic"
         }
       ]
     }
@@ -25,8 +30,8 @@
   "lastRun": {
     "searchComplete": false,
     "provider": "Yandex + public board APIs",
-    "startedAt": "2026-10-01T13:25:19.819Z",
-    "finishedAt": "2026-10-01T13:25:23.192Z",
+    "startedAt": "2026-10-01T20:22:38.773Z",
+    "finishedAt": "2026-10-01T20:22:42.594Z",
     "added": 0,
     "discovered": 0,
     "inspected": 0,
