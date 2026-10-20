@@ -30,8 +30,8 @@
   "lastRun": {
     "searchComplete": false,
     "provider": "Yandex + public board APIs",
-    "startedAt": "2026-10-20T08:38:46.208Z",
-    "finishedAt": "2026-10-20T08:38:49.814Z",
+    "startedAt": "2026-10-20T14:21:22.208Z",
+    "finishedAt": "2026-10-20T14:21:58.802Z",
     "added": 0,
     "discovered": 0,
     "inspected": 0,
@@ -43,7 +43,7 @@
         "searchUrl": "https://yandex.com/search/?text=site%3Aboards.greenhouse.io+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [
-          "Yandex requires an interactive verification"
+          "Source returned HTTP 400"
         ]
       },
       {
@@ -51,24 +51,27 @@
         "provider": "Yandex",
         "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.lever.co+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
-        "errors": [],
-        "skipped": "Yandex cooldown"
+        "errors": [
+          "Source returned HTTP 400"
+        ]
       },
       {
         "platform": "SmartRecruiters",
         "provider": "Yandex",
         "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.smartrecruiters.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
-        "errors": [],
-        "skipped": "Yandex cooldown"
+        "errors": [
+          "Source returned HTTP 400"
+        ]
       },
       {
         "platform": "Workday",
         "provider": "Yandex",
         "searchUrl": "https://yandex.com/search/?text=site%3Awd1.myworkdayjobs.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
-        "errors": [],
-        "skipped": "Yandex cooldown"
+        "errors": [
+          "Yandex requires an interactive verification"
+        ]
       },
       {
         "platform": "BambooHR",
