@@ -30,8 +30,8 @@
   "lastRun": {
     "searchComplete": false,
     "provider": "Yandex + public board APIs",
-    "startedAt": "2026-10-22T04:56:35.160Z",
-    "finishedAt": "2026-10-22T04:57:10.530Z",
+    "startedAt": "2026-10-22T11:59:57.258Z",
+    "finishedAt": "2026-10-22T12:00:22.896Z",
     "added": 0,
     "discovered": 0,
     "inspected": 0,
@@ -61,7 +61,7 @@
         "searchUrl": "https://yandex.com/search/?text=site%3Ajobs.smartrecruiters.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
         "errors": [
-          "Source returned HTTP 400"
+          "Yandex requires an interactive verification"
         ]
       },
       {
@@ -69,9 +69,8 @@
         "provider": "Yandex",
         "searchUrl": "https://yandex.com/search/?text=site%3Awd1.myworkdayjobs.com+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
-        "errors": [
-          "Yandex requires an interactive verification"
-        ]
+        "errors": [],
+        "skipped": "Yandex cooldown"
       },
       {
         "platform": "BambooHR",
