@@ -30,8 +30,8 @@
   "lastRun": {
     "searchComplete": false,
     "provider": "Yandex + public board APIs",
-    "startedAt": "2026-10-24T23:19:55.008Z",
-    "finishedAt": "2026-10-24T23:19:55.529Z",
+    "startedAt": "2026-10-25T04:49:33.127Z",
+    "finishedAt": "2026-10-25T04:49:35.916Z",
     "added": 0,
     "discovered": 0,
     "inspected": 0,
@@ -42,8 +42,9 @@
         "provider": "Yandex",
         "searchUrl": "https://yandex.com/search/?text=site%3Aboards.greenhouse.io+%28%22UX+designer%22+OR+%22UI+designer%22+OR+%22UX%2FUI+designer%22+OR+%22user+experience+designer%22+OR+%22user+interface+designer%22+OR+%22UI+developer%22+OR+%22product+designer%22%29+AND+%22remote%22&lang=en",
         "results": 0,
-        "errors": [],
-        "skipped": "Yandex cooldown"
+        "errors": [
+          "Yandex requires an interactive verification"
+        ]
       },
       {
         "platform": "Lever",
